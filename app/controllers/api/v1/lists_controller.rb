@@ -2,7 +2,6 @@ class Api::V1::ListsController < ApplicationController
 
     def index
         lists = List.all
-        items = Item.all
         render json: ListSerializer.new(lists)
 
     end 
@@ -10,7 +9,7 @@ class Api::V1::ListsController < ApplicationController
     def create
         list = List.new(list_params)
         if list.save
-            render json: list, status: :accepted
+            render json: ListSerializer.new(list), status: :accepted
         else 
             render json: {errors: list.errors.full_messages}, status: :unprocessable_entity
         end
