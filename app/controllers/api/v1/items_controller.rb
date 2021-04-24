@@ -14,6 +14,12 @@ class Api::V1::ItemsController < ApplicationController
         end
     end
 
+    def destroy
+        item = Item.find(params[:id])
+        item.destroy
+        render json: {message: "successfully deleted #{item.description}"}
+    end
+
     private
 
     def item_params
